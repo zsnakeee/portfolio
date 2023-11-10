@@ -1,0 +1,42 @@
+﻿[
+    {
+        "name": "RPO Gaming",
+        "slug": "rpo-gaming",
+        "description": "RPO Gaming is a website for a FPS (First-Person Shooter) game called \"RPO CF\"",
+        "photo_path": "assets/projects/imgs/1.png",
+        "tags": ["#laravel", "#livewire", "#bootstrap"],
+        "url": "https://rpogaming.ru/"
+    },
+    {
+        "name": "Shark Gift",
+        "slug": "shark-gift",
+        "description": "CPA website that offers users to earn money by completing offers and surveys",
+        "photo_path": "assets/projects/imgs/2.png",
+        "tags": ["#laravel", "#bootstrap"],
+        "url": "https://shark-gift.com/"
+    },
+    {
+        "name": "xStore",
+        "slug": "xstore",
+        "description": "xStore is a marketplace that offers programming services and projects",
+        "photo_path": "assets/projects/imgs/3.png",
+        "tags": ["#laravel", "#bootstrap"],
+        "url": "https://x-store.org/"
+    },
+    {
+        "name": "Coin Loot",
+        "slug": "coin-loot",
+        "description": "CPA website that offers users to earn money by completing offers and surveys",
+        "photo_path": "assets/projects/imgs/4.png",
+        "tags": ["#laravel", "#bootstrap"],
+        "url": "#"
+    },
+    {
+        "name": "Ninfox",
+        "slug": "ninfox",
+        "description": "Ninfox is a store that offers gaming services and projects",
+        "photo_path": "assets/projects/imgs/5.png",
+        "tags": ["#laravel", "#bootstrap"],
+        "url": "#"
+    }
+]

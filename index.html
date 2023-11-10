@@ -1,0 +1,587 @@
+﻿<html lang="en" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+    />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Software Engineer | Ziad Talaat</title>
+
+    <link rel="stylesheet" href="assets/app.css" />
+    <script type="module" src="assets/app.js" defer></script>
+
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+    />
+    <script
+      src="https://unpkg.com/alpinejs@3.13.2/dist/cdn.min.js"
+      defer
+    ></script>
+    <script src="https://cdn.jsdelivr.net/npm/iconify-icon@1.0.8/dist/iconify-icon.min.js"></script>
+
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp"></script>
+
+    <style type="text/tailwindcss">
+      @layer components {
+        .card {
+          @apply max-w-sm rounded overflow-hidden shadow-lg backdrop-blur bg-gray-700;
+        }
+        .badge {
+          @apply inline-block rounded-full px-3 py-1 text-sm font-semibold bg-primary-500 bg-opacity-15 backdrop-filter backdrop-blur-sm filter saturate-200
+        text-primary-200;
+        }
+        .icon-btn {
+          @apply px-3 py-2 rounded-lg bg-gray-50 hover:bg-gray-100 text-gray-400 hover:text-gray-700 dark:bg-gray-800 dark:text-gray-200 dark:hover:bg-gray-600 dark:hover:text-white transition;
+        }
+        input.form-control,
+        textarea.form-control {
+          @apply block rounded-t-lg px-2.5 pb-2.5 pt-5 w-full text-sm text-gray-900 bg-gray-50 dark:bg-gray-600 border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0
+        focus:border-blue-600;
+        }
+        .form-label {
+          @apply absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-4 z-10 origin-[0] left-2.5 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100
+        peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4;
+        }
+      }
+      nav.scrolled {
+        @apply shadow-2xl backdrop-filter backdrop-blur-sm filter saturate-200 transition;
+      }
+    </style>
+
+    <script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            animation: {
+              wave: "wave 2.25s ease-in-out infinite",
+            },
+            keyframes: {
+              wave: {
+                "0%": {
+                  transform: "rotate(0deg)",
+                },
+                "10%": {
+                  transform: "rotate(14deg)",
+                },
+                "20%": {
+                  transform: "rotate(-8deg)",
+                },
+                "30%": {
+                  transform: "rotate(14deg)",
+                },
+                "40%": {
+                  transform: "rotate(-4deg)",
+                },
+                "50%": {
+                  transform: "rotate(10deg)",
+                },
+                "60%": {
+                  transform: "rotate(0deg)",
+                },
+                "100%": {
+                  transform: "rotate(0deg)",
+                },
+              },
+            },
+            backgroundOpacity: {
+              15: "0.15",
+            },
+            colors: {
+              gray: {
+                50: "#f9fafb",
+                100: "#eaeaeb",
+                200: "#cacbcd",
+                300: "#a7a9ac",
+                400: "#696c71",
+                500: "#282d34",
+                600: "#24292f",
+                700: "#181b20",
+                800: "#121518",
+                900: "#0c0e10",
+              },
+              primary: {
+                50: "#32a4ff",
+                100: "#289aff",
+                200: "#1e90ff",
+                300: "#1486ff",
+                400: "#0a7cff",
+                500: "#0072ff",
+                600: "#0068f5",
+                700: "#005eeb",
+                800: "#0054e1",
+                900: "#004ad7",
+              },
+            },
+            fontFamily: {
+              inter: ["Inter"],
+              bricolage: ["Bricolage Grotesque"],
+              roboto: ["Roboto"],
+            },
+          },
+        },
+      };
+    </script>
+
+    <script>
+      let atTopOfPage = true;
+      window.addEventListener("scroll", () => {
+        atTopOfPage = window.scrollY === 0;
+        document
+          .querySelector("nav")
+          .classList.toggle("scrolled", !atTopOfPage);
+      });
+
+      document.documentElement.classList.add(
+        localStorage.theme === "light" ? "light" : "dark"
+      );
+
+      function toggleTheme() {
+        if (localStorage.theme === "dark") {
+          localStorage.theme = "light";
+          document.documentElement.classList.remove("dark");
+        } else {
+          localStorage.theme = "dark";
+          document.documentElement.classList.add("dark");
+        }
+      }
+    </script>
+
+    <script>
+      const linkedin = "https://www.linkedin.com/in/ziad-talaat/";
+      const github = "https://github.com/zsnakeee/";
+      const facebook = "https://www.facebook.com/snake2019";
+    </script>
+  </head>
+
+  <body
+    class="antialiased bg-gradient-to-br from-white via-gray-100 to-white dark:from-black from-10% dark:via-gray-700 dark:to-black to-80% font-inter text-gray-500 selection:bg-gray-900 selection:dark:bg-white selection:text-white selection:dark:text-primary-500"
+  >
+    <nav class="fixed z-10 w-full">
+      <div class="md:px-[20rem] md:py-5 p-5">
+        <div class="flex justify-between">
+          <div
+            class="flex gap-2"
+            x-data="{ isDarkMode: localStorage.theme === 'dark' }"
+          >
+            <button
+              class="icon-btn"
+              @click="toggleTheme(); isDarkMode = !isDarkMode"
+            >
+              <iconify-icon
+                icon="line-md:sun-rising-loop"
+                x-show="isDarkMode"
+              ></iconify-icon>
+              <iconify-icon
+                icon="line-md:moon-loop"
+                x-show="!isDarkMode"
+              ></iconify-icon>
+            </button>
+          </div>
+          <div class="flex gap-2">
+            <a
+              href="https://www.linkedin.com/in/ziad-talaat/"
+              target="_blank"
+              class="icon-btn"
+            >
+              <iconify-icon icon="line-md:linkedin"></iconify-icon>
+            </a>
+            <a
+              href="https://github.com/zsnakeee/"
+              target="_blank"
+              class="icon-btn"
+            >
+              <iconify-icon icon="line-md:discord-twotone"></iconify-icon>
+            </a>
+            <a
+              href="https://www.facebook.com/snake2019"
+              target="_blank"
+              class="icon-btn"
+            >
+              <iconify-icon icon="line-md:facebook"></iconify-icon>
+            </a>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <main class="flex flex-col justify-center px-8">
+      <div class="fixed inset-0 -z-10" id="background-animation"></div>
+      <div class="min-h-screen flex items-center justify-center py-12">
+        <div
+          class="max-w-md sm:max-w-lg md:sm:max-w-2xl lg:sm:max-w-3xl w-full space-y-8 text-center"
+        >
+          <h1
+            class="text-gray-500 dark:text-white text-5xl sm:text-6xl md:text-6xl lg:text-8xl tracking-tight font-extrabold"
+            id="welcome-title"
+            style="transform: scale(1); opacity: 1"
+          >
+            Hey
+            <span class="inline-block origin-70 hover:animate-wave">👋</span>
+            I'm Ziad, <br class="hidden sm:block" />a
+            <div
+              class="inline-flex px-3 lg:px-5 py-2 md:pb-4 bg-primary-500 bg-opacity-15 backdrop-filter backdrop-blur-sm filter saturate-200 text-primary-200 rounded-2xl default-transition default-focus mt-4"
+            >
+              developer
+            </div>
+          </h1>
+          <p
+            class="max-w-xs mt-4 md:mt-8 mx-auto text-base text-gray-400 sm:text-lg md:text-xl md:max-w-3xl"
+            style="transform: scale(1); opacity: 1"
+          >
+            I am a software engineer based in Egypt
+          </p>
+          <div
+            class="flex flex-col sm:flex-row items-center justify-center sm:space-x-4 space-y-4 sm:space-y-0 w-full mt-8 sm:mt-4"
+          >
+            <div
+              class="w-full sm:w-auto"
+              style="transform: translateY(0); opacity: 1"
+            >
+              <a
+                class="inline-flex items-center justify-center w-full sm:w-auto bg-gray-50/75 hover:bg-gray-100/75 hover:text-gray-500 dark:bg-gray-900/75 dark:hover:bg-gray-800/75 dark:border-gray-700 dark:text-primary-500 dark:hover:text-primary-400 backdrop-filter backdrop-blur-sm saturate-200 text-gray-400 font-medium border-2 border-gray-200/50 rounded-lg cursor-pointer default-transition default-focus px-8 py-2"
+                href="javascript:void(0)"
+                rel="noopener noreferrer"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  xmlns:xlink="http://www.w3.org/1999/xlink"
+                  aria-hidden="true"
+                  role="img"
+                  class="mr-3 iconify iconify--feather"
+                  width="1em"
+                  height="1em"
+                  preserveAspectRatio="xMidYMid meet"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M12 20h9M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1l1-4L16.5 3.5z"
+                  ></path>
+                </svg>
+                <span>Blog</span></a
+              >
+            </div>
+            <div
+              class="w-full sm:w-auto"
+              style="transform: translateY(0); opacity: 1"
+            >
+              <a
+                class="inline-flex items-center justify-center w-full sm:w-auto bg-gray-50/75 hover:bg-gray-100/75 hover:text-gray-500 dark:bg-gray-900/75 dark:hover:bg-gray-800/75 dark:border-gray-700 dark:text-primary-500 dark:hover:text-primary-400 backdrop-filter backdrop-blur-sm saturate-200 text-gray-400 font-medium border-2 border-gray-200/50 rounded-lg cursor-pointer default-transition default-focus px-8 py-2"
+                href="#projects"
+                rel="noopener noreferrer"
+                id="projectsx"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  xmlns:xlink="http://www.w3.org/1999/xlink"
+                  aria-hidden="true"
+                  role="img"
+                  class="mr-3 iconify iconify--feather"
+                  width="1em"
+                  height="1em"
+                  preserveAspectRatio="xMidYMid meet"
+                  viewBox="0 0 24 24"
+                >
+                  <g
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                  >
+                    <rect
+                      width="13"
+                      height="13"
+                      x="9"
+                      y="9"
+                      rx="2"
+                      ry="2"
+                    ></rect>
+                    <path
+                      d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"
+                    ></path>
+                  </g>
+                </svg>
+                <span>Projects</span></a
+              >
+            </div>
+            <div
+              class="w-full sm:w-auto"
+              style="transform: translateY(0); opacity: 1"
+            >
+              <a
+                class="inline-flex items-center justify-center w-full sm:w-auto bg-gray-50/75 hover:bg-gray-100/75 hover:text-gray-500 dark:bg-gray-900/75 dark:hover:bg-gray-800/75 dark:border-gray-700 dark:text-primary-500 dark:hover:text-primary-400 backdrop-filter backdrop-blur-sm saturate-200 text-gray-400 font-medium border-2 border-gray-200/50 rounded-lg cursor-pointer default-transition default-focus px-8 py-2"
+                href="https://github.com/zsnakeee"
+                rel="noopener noreferrer"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  xmlns:xlink="http://www.w3.org/1999/xlink"
+                  aria-hidden="true"
+                  role="img"
+                  class="mr-3 iconify iconify--feather"
+                  width="1em"
+                  height="1em"
+                  preserveAspectRatio="xMidYMid meet"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77A5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"
+                  ></path>
+                </svg>
+                <span>GitHub</span></a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <section class="xl:px-[10rem] lg:px-10 md:px-5 md:py-5" id="projects">
+        <hr class="border-primary-300 border-opacity-25 w-2/3 mx-auto mb-20" />
+
+        <div class="text-center">
+          <div
+            class="inline-flex px-3 lg:px-5 py-2 md:pb-4 bg-primary-500 bg-opacity-15 backdrop-filter backdrop-blur-sm filter saturate-200 text-primary-200 rounded-2xl default-transition default-focus mt-4 mb-10"
+          >
+            #projects 🔥
+          </div>
+        </div>
+
+        <div class="swiper mt-10">
+          <div class="swiper-wrapper"></div>
+          <div class="text-center mt-10">
+            <button
+              class="col-span-full backdrop-filter backdrop-blur-sm saturate-200 cursor-pointer default-transition default-focus px-8 py-2 rounded-md bg-primary-700 text-white hover:bg-primary-400 hover:text-white font-roboto"
+            >
+              Show more
+            </button>
+
+            <div class="mt-6">
+              <button
+                class="swiper-button-prev-c rounded-xl bg-primary-500 bg-opacity-15 text-primary-200 enabled:hover:bg-opacity-50 enabled:hover:text-white disabled:bg-gray-200 dark:disabled:bg-gray-500 disabled:text-gray-400 px-2 py-2 me-1"
+              >
+                <span
+                  class="iconify w-6 h-6"
+                  data-icon="iconamoon:arrow-left-2-fill"
+                ></span>
+              </button>
+              <button
+                class="swiper-button-next-c rounded-xl bg-primary-500 bg-opacity-15 text-primary-200 enabled:hover:bg-opacity-50 enabled:hover:text-white disabled:bg-gray-200 dark:disabled:bg-gray-500 disabled:text-gray-400 px-2 py-2 me-1"
+              >
+                <span
+                  class="iconify w-6 h-6"
+                  data-icon="iconamoon:arrow-right-2-fill"
+                ></span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <hr class="border-primary-300 border-opacity-25 w-2/3 mx-auto mt-20" />
+      </section>
+      <section class="xl:px-[10rem] lg:px-10 md:px-5 md:py-5 mt-10">
+        <div class="text-center">
+          <div
+            class="inline-flex px-3 lg:px-5 py-2 md:pb-4 bg-primary-500 bg-opacity-15 backdrop-filter backdrop-blur-sm filter saturate-200 text-primary-200 rounded-2xl default-transition default-focus mt-4 mb-10"
+          >
+            #contact with me 📞
+          </div>
+        </div>
+
+        <form class="mt-2">
+          <div
+            class="container m-auto grid grid-cols-1 md:grid-cols-2 gap-4 justify-between w-full md:w-2/3"
+          >
+            <div class="relative">
+              <input
+                type="text"
+                id="name"
+                class="form-control peer"
+                placeholder=" "
+              />
+              <label for="name" class="form-label">Full Name *</label>
+            </div>
+
+            <div class="relative">
+              <input
+                type="text"
+                id="mobile_number"
+                class="form-control peer"
+                placeholder=" "
+              />
+              <label for="mobile_number" class="form-label"
+                >Mobile number *</label
+              >
+            </div>
+
+            <div class="relative col-span-full">
+              <input
+                type="text"
+                id="email"
+                class="form-control peer"
+                placeholder=" "
+              />
+              <label for="email" class="form-label">Email *</label>
+            </div>
+
+            <div class="relative col-span-full">
+              <textarea
+                type="text"
+                id="letter"
+                class="form-control h-[160px] peer"
+                placeholder=" "
+              ></textarea>
+              <label for="letter" class="form-label">Your letter *</label>
+            </div>
+
+            <button
+              onclick="alert('sorry! this feature is not available yet')"
+              class="col-span-full backdrop-filter backdrop-blur-sm saturate-200 cursor-pointer default-transition default-focus px-8 py-2 rounded-md bg-primary-700 text-white hover:bg-primary-400 hover:text-white font-roboto"
+            >
+              Send your message
+            </button>
+          </div>
+        </form>
+      </section>
+    </main>
+
+    <footer class="mt-40">
+      <div class="relative mt-16 bg-gray-500 font-mono">
+        <div
+          class="px-4 pt-12 mx-auto sm:max-w-xl md:max-w- lg:max-w-screen-xl md:px-24 lg:px-8 w-2/3"
+        >
+          <div
+            class="flex flex-col justify-around pt-5 pb-10 sm:flex-row text-center gap-10"
+          >
+            <div class="order-2 sm:order-1">
+              <p class="text-blue-500 text-lg font-semibold">Email</p>
+              <p class="mt-2 text-sm text-gray-100">
+                <a href="mailto:ziadtallat33@gmail.com" class="hover:underline">
+                  ziadtallat33@gmail.com
+                </a>
+              </p>
+            </div>
+
+            <div class="order-1 sm:order-2">
+              <p class="text-blue-500 text-lg font-semibold">Ziad Talaat</p>
+              <p class="mt-2 text-sm text-gray-100">Software Engineer</p>
+            </div>
+          </div>
+
+          <div class="text-center">
+            <p class="font-medium text-gray-100">
+              © Copyright
+              <script>
+                document.write(new Date().getFullYear());
+              </script>
+              <a href class="text-primary-200 hover:underline">Ziad Talaat</a>.
+              All rights reserved.
+            </p>
+
+            <div class="inline-flex items-center space-x-4 pt-5 pb-10">
+              <a
+                href="https://github.com/zsnakeee"
+                target="_blank"
+                class="transition-colors duration-300 text-primary-200 hover:text-primary-50"
+              >
+                <i
+                  class="iconify w-[30px] h-[30px]"
+                  data-icon="logos:github-icon"
+                ></i>
+              </a>
+              <a
+                href="https://www.facebook.com/snake2019"
+                target="_blank"
+                class="transition-colors duration-300 text-primary-200 hover:text-primary-50"
+              >
+                <i
+                  class="iconify w-[30px] h-[30px]"
+                  data-icon="logos:facebook"
+                ></i>
+              </a>
+              <a
+                href="https://www.linkedin.com/in/ziad-talaat/"
+                target="_blank"
+                class="transition-colors duration-300 text-primary-200 hover:text-primary-50"
+              >
+                <i
+                  class="iconify w-[30px] h-[30px]"
+                  data-icon="logos:linkedin-icon"
+                ></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script type="module">
+      import Swiper from "https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.mjs";
+
+      async function getProjects() {
+        const response = await fetch("/assets/projects/data.json");
+        const data = await response.json();
+        return data;
+      }
+
+      window.addEventListener("load", async () => {
+        const projects = await getProjects();
+        const projectsContainer = document.querySelector(".swiper");
+        const swiperWrapper =
+          projectsContainer.querySelector(".swiper-wrapper");
+
+        projects.forEach((project) => {
+          let tags = ``;
+          project.tags.forEach((tag) => {
+            tags += `<span class="badge mr-2 mb-2">${tag}</span>`;
+          });
+
+          const projectCard = document.createElement("div");
+          projectCard.classList.add("swiper-slide", "card");
+          projectCard.innerHTML = `
+                <a href="${project.url}" target="_blank">
+                    <img alt="${project.name}" 
+                    class="w-full h-60 object-cover hover:blur transition duration-300" 
+                    src="${project.photo_path}">
+                </a>
+                <div class="px-6 py-4">
+                    <a href="${project.url}" target="_blank"
+                    class="font-bold text-xl text-primary-400 hover:text-primary-100 transition duration-300">${project.name}</a>
+                    <p class="text-gray-200 mt-2">${project.description}</p>
+                    <div class="mt-4">
+                        ${tags}
+                    </div>
+                </div>
+            </div>`;
+
+          swiperWrapper.appendChild(projectCard);
+
+          const swiper = new Swiper(".swiper", {
+            slidesPerView: "auto",
+            spaceBetween: 20,
+            pagination: {
+              el: ".swiper-pagination",
+            },
+            navigation: {
+              nextEl: ".swiper-button-next-c",
+              prevEl: ".swiper-button-prev-c",
+            },
+          });
+        });
+      });
+    </script>
+  </body>
+</html>
