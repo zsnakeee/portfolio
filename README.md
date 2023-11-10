@@ -1,3 +1,3 @@
 # My Portfolio
 
-Welcome to my GitHub portfolio! 🚀 Here, you'll find a collection of projects showcasing my skills.
+You can access the portfolio from [here](link-to-github-profile) 😉
