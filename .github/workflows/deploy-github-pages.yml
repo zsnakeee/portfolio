@@ -31,7 +31,7 @@ jobs:
 
       # Upload artifacts for deployment
       - name: Upload artifact for deployment
-        uses: actions/upload-pages-artifact@v1
+        uses: actions/upload-pages-artifact@v3
         with:
           name: github-pages
           path: ./dist
