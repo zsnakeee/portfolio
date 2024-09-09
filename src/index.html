@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" class="dark">
+<html lang="en">
     <head>
         <meta charset="UTF-8"/>
         <meta name="viewport"
@@ -51,7 +51,7 @@
             <div class="md:px-[8rem] md:py-5 p-5">
                 <div class="flex justify-between">
                     <div class="flex gap-2"
-                         x-data="{ isDarkMode: localStorage.getItem('theme') === 'dark' || document.documentElement.classList.contains('dark'),
+                         x-data="{ isDarkMode: localStorage.getItem('theme') === 'dark',
                                     toggleTheme() {
                                         this.isDarkMode = !this.isDarkMode;
                                         if (this.isDarkMode) {
@@ -61,14 +61,19 @@
                                         }
                                   }
                                 }"
-                         x-init="if(localStorage.getItem('theme') === 'dark') { document.documentElement.classList.add('dark'); }
-                                    $watch('isDarkMode', value => {
-                                    if (value) {
-                                        document.documentElement.classList.add('dark');
-                                    } else {
-                                        document.documentElement.classList.remove('dark');
-                                    }
-                                })">
+                         x-init="if(localStorage.getItem('theme') === null) {
+                             localStorage.setItem('theme', 'dark');
+                             isDarkMode = true;
+                         }
+                         if(localStorage.getItem('theme') === 'dark') {
+                            document.documentElement.classList.add('dark');
+                         }
+                         $watch('isDarkMode', value => {
+                            if (value)
+                                 document.documentElement.classList.add('dark');
+                            else
+                                 document.documentElement.classList.remove('dark');
+                            })">
                         <button class="icon-btn" @click="toggleTheme()">
                             <iconify-icon icon="line-md:sun-rising-loop" x-show="isDarkMode"></iconify-icon>
                             <iconify-icon icon="line-md:moon-loop" x-show="!isDarkMode"></iconify-icon>
@@ -159,13 +164,13 @@
 
             <!-- Swiper Navigation Buttons -->
             <div class="mb-3 flex flex-row-reverse gap-2 ">
-                <div class="swiper-button-prev-c">
+                <div class="swiper-button-next-c">
                     <button class="px-3 py-2 flex items-center justify-center text-sm font-semibold text-white bg-gray-600 rounded-lg hover:bg-gray-700 focus:ring focus:ring-gray-300 group transition duration-300">
                         <iconify-icon icon="noto-v1:right-arrow" width="1.4em" height="1.4em"></iconify-icon>
                     </button>
                 </div>
 
-                <div class="swiper-button-next-c">
+                <div class="swiper-button-prev-c">
                     <button class="px-3 py-2 flex items-center justify-center text-sm font-semibold text-white bg-gray-600 rounded-lg hover:bg-gray-700 focus:ring focus:ring-gray-300 group transition duration-300">
                         <iconify-icon icon="noto-v1:left-arrow" width="1.4em" height="1.4em"></iconify-icon>
                     </button>
@@ -259,13 +264,13 @@
 
             <!-- Swiper Navigation Buttons -->
             <div class="mb-3 flex flex-row-reverse gap-2 ">
-                <div class="swiper-button-prev-c ">
+                <div class="swiper-button-next-c">
                     <button class="px-3 py-2 flex items-center justify-center text-sm font-semibold text-white bg-gray-600 rounded-lg hover:bg-gray-700 focus:ring focus:ring-gray-300 group transition duration-300">
                         <iconify-icon icon="noto-v1:right-arrow" width="1.4em" height="1.4em"></iconify-icon>
                     </button>
                 </div>
 
-                <div class="swiper-button-next-c">
+                <div class="swiper-button-prev-c">
                     <button class="px-3 py-2 flex items-center justify-center text-sm font-semibold text-white bg-gray-600 rounded-lg hover:bg-gray-700 focus:ring focus:ring-gray-300 group transition duration-300">
                         <iconify-icon icon="noto-v1:left-arrow" width="1.4em" height="1.4em"></iconify-icon>
                     </button>
@@ -317,15 +322,16 @@
                                     Demo
                                 </a>
 
-                                <!-- Buy Button -->
-                                <a x-show="project.buy" :href="project.buy" target="_blank"
-                                   class="flex items-center px-4 py-2 text-sm font-semibold text-white bg-green-600 rounded-lg hover:bg-green-700 focus:ring focus:ring-green-300 group/buy">
-                                <span>
-                                    <iconify-icon icon="fluent-emoji:star" width="1.2em" height="1.2em"
-                                                  class="flex me-1 group-hover/buy:animate-wave"></iconify-icon>
-                                </span>
-                                    Buy
-                                </a>
+                                <!--                                &lt;!&ndash; Showcase Button &ndash;&gt;-->
+                                <!--                                <a x-show="project.showcase" :href="project.showcase" target="_blank"-->
+                                <!--                                   class="flex items-center px-4 py-2 text-sm font-semibold text-white bg-green-600 rounded-lg hover:bg-green-700 focus:ring focus:ring-green-300 group/buy">-->
+                                <!--                                <span>-->
+                                <!--                                    <iconify-icon icon="fluent-emoji:star" width="1.2em" height="1.2em"-->
+                                <!--                                                  class="flex me-1 group-hover/buy:animate-wave"></iconify-icon>-->
+                                <!--                                </span>-->
+                                <!--                                    Showcase-->
+                                <!--                                </a>-->
+
 
                                 <!-- Source Code Button -->
                                 <a x-show="project.repo" :href="project.repo" target="_blank"
@@ -447,13 +453,13 @@
         </section>
 
         <footer class="mt-40">
-            <div class="relative mt-16 font-mono bg-gray-800">
+            <div class="relative mt-16 font-mono bg-gray-100 dark:bg-gray-800">
                 <div class="w-11/12 mx-auto sm:max-w-xl md:max-w-screen-lg lg:max-w-screen-xl md:px-24 lg:px-8">
                     <div class="flex flex-col justify-between gap-10 pt-10 pb-10 text-center sm:flex-row sm:items-center">
                         <!-- Email Section -->
                         <div class="order-2 sm:order-1">
                             <p class="text-lg font-semibold text-blue-400">Email</p>
-                            <p class="mt-2 text-sm text-gray-300">
+                            <p class="mt-2 text-sm dark:text-gray-300">
                                 <a href="mailto:ziadtallat33@gmail.com" class="hover:underline">
                                     ziadtallat33@gmail.com
                                 </a>
@@ -463,24 +469,25 @@
                         <!-- Name and Title Section -->
                         <div class="order-1 sm:order-2">
                             <p class="text-lg font-semibold text-blue-400">Ziad Talaat</p>
-                            <p class="mt-2 text-sm text-gray-300">Software Engineer</p>
+                            <p class="mt-2 text-sm dark:text-gray-300">Software Engineer</p>
                         </div>
                     </div>
 
                     <!-- Social Media Icons Section -->
                     <div class="text-center">
-                        <p class="font-medium text-gray-400">
+                        <p class="font-medium dark:text-gray-400">
                             ©
                             <script>document.write(new Date().getFullYear());</script>
                             <a href="#" class="text-blue-400 hover:underline">Ziad Talaat</a>. All rights reserved.
                         </p>
 
-                        <div class="flex justify-center space-x-6 mt-6">
+                        <div class="flex justify-center space-x-6 mt-6 pb-3">
                             <!-- GitHub -->
                             <a href="https://github.com/zsnakeee" target="_blank"
                                class="text-gray-400 hover:text-white transition-colors duration-300">
                                 <iconify-icon icon="bi:github" width="30px" height="30px"
-                                              style="color: #ffffff"></iconify-icon>
+                                              class="dark:text-white text-black"
+                                              ></iconify-icon>
                             </a>
                             <!-- Facebook -->
                             <a href="https://www.facebook.com/snake2019" target="_blank"
