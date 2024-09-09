@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" class="dark">
     <head>
         <meta charset="UTF-8"/>
         <meta name="viewport"
@@ -51,7 +51,7 @@
             <div class="md:px-[8rem] md:py-5 p-5">
                 <div class="flex justify-between">
                     <div class="flex gap-2"
-                         x-data="{ isDarkMode: localStorage.getItem('theme') === 'dark',
+                         x-data="{ isDarkMode: localStorage.getItem('theme') === 'dark' || document.documentElement.classList.contains('dark'),
                                     toggleTheme() {
                                         this.isDarkMode = !this.isDarkMode;
                                         if (this.isDarkMode) {
