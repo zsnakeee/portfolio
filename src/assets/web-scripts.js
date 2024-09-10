@@ -49,5 +49,31 @@ export const webScripts = [
             name: "Free",
             class: "tag-warning"
         }
+    },
+    {
+        name: "SharkGift",
+        description: "A Advanced CPA and Offerwall platform",
+        demo: "https://sharkgift.ziadt.dev/",
+        image: "assets/img/sharkgift/user-dashboard-front.png",
+        buy: `https://wa.me/+201127070346?text=${encodeURIComponent("I'm interested in SharkGift")}`,
+        repo: "",
+        tags: [
+            {
+                name: "CPA",
+                class: "tag-primary"
+            },
+            {
+                name: "Offerwall",
+                class: "tag-success"
+            },
+            {
+                name: "Advanced",
+                class: "tag-danger"
+            }
+        ],
+        badge: {
+            name: "-10%",
+            class: "tag-danger"
+        }
     }
 ]
